@@ -1,6 +1,8 @@
 node_modules/
 dist/
+.vite/
 .DS_Store
 *.log
 .env
-freeclaude.batfreeclaude.bat 
+freeclaude.bat
+deploy.bat
