@@ -12,7 +12,7 @@ export default function Domains() {
       >
         <p className="font-mono text-xs tracking-[0.25em] text-amber uppercase">// компетенции</p>
         <h2 className="font-display mt-3 max-w-2xl text-3xl leading-tight sm:text-4xl">
-          Шесть направлений, одна голова
+          Девять направлений, одна голова
         </h2>
         <p className="mt-4 max-w-xl text-dim">
           Не «немного всего», а связанная система: код, инфраструктура и

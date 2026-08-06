@@ -24,13 +24,13 @@ export default function Contact() {
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <a
-              href="mailto:hello@example.dev"
+              href="mailto:pavlovka0109@gmail.com"
               className="rounded-full bg-amber px-7 py-3.5 font-mono text-sm font-semibold text-abyss transition-transform hover:scale-[1.04] active:scale-[0.98]"
             >
-              hello@example.dev
+              pavlovka0109@gmail.com
             </a>
             <a
-              href="https://t.me/username"
+              href="https://t.me/dota2_developer"
               target="_blank"
               rel="noreferrer"
               className="rounded-full border border-line px-7 py-3.5 font-mono text-sm text-ink transition-colors hover:border-ice hover:text-ice"
@@ -38,7 +38,7 @@ export default function Contact() {
               telegram
             </a>
             <a
-              href="https://github.com/username"
+              href="https://github.com/Nerykery"
               target="_blank"
               rel="noreferrer"
               className="rounded-full border border-line px-7 py-3.5 font-mono text-sm text-ink transition-colors hover:border-ice hover:text-ice"

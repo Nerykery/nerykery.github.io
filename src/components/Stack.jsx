@@ -102,15 +102,30 @@ export default function Stack() {
           <div className="flex flex-wrap justify-center gap-3">
             {EXTRA_TAGS.map((tech, i) => (
               <motion.span
-                key={tech}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 0.9 + i * 0.03 }}
-                whileHover={{ y: -2 }}
-                className="cursor-default rounded-full border border-line bg-panel-2/60 px-4 py-2 text-sm text-ink/85 transition-colors hover:border-ice/50 hover:text-ice"
-              >
-                {tech}
-              </motion.span>
+              key={tech.name}
+              className="group relative"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.9 + i * 0.03 }}
+            >
+                <span className="block cursor-default rounded-full border border-line bg-panel-2/60 px-4 py-2 text-sm text-ink/85 transition-[color,border-color,transform] duration-150 group-hover:-translate-y-0.5 group-hover:border-ice/50 group-hover:text-ice">
+                  {tech.name}
+                </span>
+                <span className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-3 w-60 -translate-x-1/2 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                  <span className="block rounded-xl border border-line bg-panel-2/95 px-4 py-3 text-left shadow-2xl shadow-black/40 backdrop-blur-md">
+                    <span className="mb-1 block font-mono text-xs tracking-wide text-ice uppercase">
+                      {tech.name}
+                    </span>
+                    <span className="block text-[11px] leading-relaxed text-dim">
+                      {tech.desc}
+                    </span>
+                    <span className="mt-2 block truncate font-mono text-[11px] text-amber/90">
+                      {tech.example}
+                    </span>
+                  </span>
+                  <span className="absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-line bg-panel-2" />
+                </span>
+            </motion.span>
             ))}
           </div>
         </motion.div>
