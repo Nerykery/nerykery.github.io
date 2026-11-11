@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Braces, Shield, Globe, Cpu, GraduationCap, BadgeCheck } from "lucide-react";
 
 const HIGHLIGHTS = [
@@ -32,23 +32,26 @@ const HIGHLIGHTS = [
 export default function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const reduced = useReducedMotion();
+
+  const fade = (delay) => ({
+    initial: reduced ? false : { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay },
+  });
 
   return (
-    <section id="about" className="relative z-10 mx-auto max-w-6xl scroll-mt-20 px-5 py-24" ref={ref}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-      >
-        <p className="font-mono text-xs tracking-[0.25em] text-ice uppercase">// about_me</p>
-        <h2 className="font-display mt-3 text-3xl leading-tight sm:text-4xl">
+    <section id="about" className="relative z-10 mx-auto max-w-6xl px-5 py-24" ref={ref}>
+      <motion.div {...fade(0)}>
+        <p className="eyebrow text-ice">// about_me</p>
+        <h2 className="font-display mt-3 text-title">
           Обо <span className="gradient-text">мне</span>
         </h2>
       </motion.div>
 
       <div className="mt-12 grid items-center gap-10 lg:grid-cols-2">
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
+          initial={reduced ? false : { opacity: 0, x: -50 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
@@ -86,7 +89,7 @@ export default function About() {
 
             <div className="mt-8 space-y-4 border-t border-line pt-6">
               <div className="flex items-start gap-3">
-                <GraduationCap size={20} className="mt-0.5 shrink-0 text-amber" />
+                <GraduationCap size={20} className="mt-0.5 shrink-0 text-amber" aria-hidden="true" />
                 <div>
                   <div className="text-sm font-semibold text-ink">
                     Диплом — информационная безопасность
@@ -95,7 +98,7 @@ export default function About() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <BadgeCheck size={20} className="mt-0.5 shrink-0 text-ice" />
+                <BadgeCheck size={20} className="mt-0.5 shrink-0 text-ice" aria-hidden="true" />
                 <div>
                   <div className="text-sm font-semibold text-ink">
                     Дополнительное образование — ИБ в финансовых и экономических структурах
@@ -111,16 +114,16 @@ export default function About() {
           {HIGHLIGHTS.map((item, i) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={reduced ? false : { opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-              className="glass-card group cursor-default p-7"
+              className="glass-card group p-7"
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-panel-2 transition-transform group-hover:scale-110">
-                <item.icon size={22} className={item.accent} />
+                <item.icon size={22} className={item.accent} aria-hidden="true" />
               </div>
               <h3 className="mb-2 font-semibold text-ink">{item.title}</h3>
-              <p className="text-sm text-dim">{item.desc}</p>
+              <p className="text-body-sm text-dim">{item.desc}</p>
             </motion.div>
           ))}
         </div>

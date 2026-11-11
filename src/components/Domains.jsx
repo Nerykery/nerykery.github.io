@@ -1,17 +1,19 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { DOMAINS } from "../content.js";
 
 export default function Domains() {
+  const reduced = useReducedMotion();
+
   return (
-    <section id="domains" className="relative z-10 mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
+    <section id="domains" className="relative z-10 mx-auto max-w-6xl px-5 py-24">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={reduced ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
       >
-        <p className="font-mono text-xs tracking-[0.25em] text-amber uppercase">// компетенции</p>
-        <h2 className="font-display mt-3 max-w-2xl text-3xl leading-tight sm:text-4xl">
+        <p className="eyebrow text-amber">// компетенции</p>
+        <h2 className="font-display mt-3 max-w-2xl text-title">
           Девять направлений, одна голова
         </h2>
         <p className="mt-4 max-w-xl text-dim">
@@ -26,12 +28,11 @@ export default function Domains() {
           return (
             <motion.article
               key={d.code}
-              initial={{ opacity: 0, y: 28 }}
+              initial={reduced ? false : { opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.55, delay: (i % 3) * 0.12 }}
-              whileHover={{ y: -6 }}
-              className={`group glass-card relative overflow-hidden p-6 ${
+              className={`glass-card group relative overflow-hidden p-6 ${
                 isAmber ? "hover:border-amber/60" : "hover:border-ice/60"
               }`}
             >
@@ -49,14 +50,18 @@ export default function Domains() {
                 >
                   [{d.code}]
                 </span>
-                <span className="font-mono text-xs text-dim">0{i + 1}</span>
+                <span className="font-mono text-xs text-dim tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
               </div>
-              <h3 className="mt-4 text-lg font-bold text-ink">{d.title}</h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-dim">{d.desc}</p>
+              <h3 className="mt-4 text-subtitle text-ink">{d.title}</h3>
+              <p className="mt-2.5 text-body-sm leading-relaxed text-dim">{d.desc}</p>
               <ul className="mt-5 space-y-1.5 border-t border-line pt-4">
                 {d.points.map((p) => (
                   <li key={p} className="flex items-baseline gap-2 text-sm text-ink/80">
-                    <span className={isAmber ? "text-amber" : "text-ice"} aria-hidden="true">▸</span>
+                    <span className={isAmber ? "text-amber" : "text-ice"} aria-hidden="true">
+                      ▸
+                    </span>
                     {p}
                   </li>
                 ))}

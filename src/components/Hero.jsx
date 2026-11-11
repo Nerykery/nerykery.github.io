@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, Code2, Shield, Server } from "lucide-react";
 import CipherCanvas from "./CipherCanvas.jsx";
 import DecryptText from "./DecryptText.jsx";
@@ -12,13 +12,8 @@ const ROLES = [
   "Python / C++ / 1C",
 ];
 
-const fade = (delay) => ({
-  initial: { opacity: 0, y: 22 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, delay, ease: "easeOut" },
-});
-
-function OrbitRing({ radius, duration, icon: Icon, delay = 0 }) {
+function OrbitRing({ radius, duration, icon: Icon, delay = 0, reduced }) {
+  if (reduced) return null;
   return (
     <motion.div
       aria-hidden="true"
@@ -52,6 +47,13 @@ function OrbitRing({ radius, duration, icon: Icon, delay = 0 }) {
 
 export default function Hero() {
   const typedText = useTypingEffect(ROLES);
+  const reduced = useReducedMotion();
+
+  const fade = (delay) => ({
+    initial: reduced ? false : { opacity: 0, y: 22 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.7, delay, ease: "easeOut" },
+  });
 
   return (
     <section id="top" className="relative flex min-h-svh items-center overflow-hidden">
@@ -62,18 +64,18 @@ export default function Hero() {
       />
 
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
-        <OrbitRing radius={290} duration={38} icon={Code2} delay={0} />
-        <OrbitRing radius={390} duration={55} icon={Shield} delay={0.2} />
-        <OrbitRing radius={490} duration={72} icon={Server} delay={0.4} />
+        <OrbitRing radius={290} duration={38} icon={Code2} delay={0} reduced={reduced} />
+        <OrbitRing radius={390} duration={55} icon={Shield} delay={0.2} reduced={reduced} />
+        <OrbitRing radius={490} duration={72} icon={Server} delay={0.4} reduced={reduced} />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pt-24 pb-16">
-        <motion.p {...fade(0.1)} className="mb-5 flex items-center gap-2.5 font-mono text-xs tracking-[0.25em] text-dim uppercase">
+        <motion.p {...fade(0.1)} className="eyebrow mb-5 flex items-center gap-2.5 text-dim">
           <span className="status-dot inline-block h-2 w-2 rounded-full bg-amber" />
           открыт к проектам
         </motion.p>
 
-        <h1 className="font-display text-[clamp(2rem,6.5vw,4.6rem)] leading-[1.08] font-semibold tracking-tight">
+        <h1 className="font-display text-display">
           <DecryptText text="Пишу код." delay={300} className="block text-ink" />
           <DecryptText text="Строю инфраструктуру." delay={900} className="block text-ink" />
           <span className="block">
@@ -99,17 +101,17 @@ export default function Hero() {
         <motion.div {...fade(1.2)} className="mt-9 flex flex-wrap items-center gap-4">
           <motion.a
             href="#domains"
-            whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(255, 178, 36, 0.35)" }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full bg-amber px-6 py-3 font-mono text-sm font-semibold text-abyss"
+            whileHover={reduced ? undefined : { scale: 1.03 }}
+            whileTap={reduced ? undefined : { scale: 0.96 }}
+            className="btn btn-primary"
           >
             смотреть компетенции
           </motion.a>
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full border border-line px-6 py-3 font-mono text-sm text-ink transition-colors hover:border-ice hover:text-ice"
+            whileHover={reduced ? undefined : { scale: 1.03 }}
+            whileTap={reduced ? undefined : { scale: 0.96 }}
+            className="btn btn-ghost"
           >
             написать мне
           </motion.a>
@@ -119,15 +121,18 @@ export default function Hero() {
       <motion.a
         href="#about"
         aria-label="Прокрутить к разделу «Обо мне»"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 8, 0] }}
-        transition={{
-          opacity: { delay: 2 },
-          y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-        }}
+        initial={reduced ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 0.6 }}
         className="absolute bottom-7 left-1/2 -translate-x-1/2 text-dim transition-colors hover:text-amber"
       >
-        <ChevronDown size={28} />
+        <motion.span
+          animate={reduced ? undefined : { y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="block"
+        >
+          <ChevronDown size={28} />
+        </motion.span>
       </motion.a>
     </section>
   );

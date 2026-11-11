@@ -1,0 +1,108 @@
+import {
+  Atom,
+  Bot,
+  Blocks,
+  Braces,
+  Bug,
+  CheckCircle2,
+  Cloud,
+  Code2,
+  Container,
+  Cpu,
+  Database,
+  FileCode2,
+  Fingerprint,
+  Gauge,
+  GitBranch,
+  Hash,
+  Layers,
+  LayoutTemplate,
+  Lock,
+  MessageCircle,
+  Network,
+  Radio,
+  Radar,
+  RefreshCw,
+  Scale,
+  Search,
+  Server,
+  Shield,
+  ShieldCheck,
+  Smartphone,
+  Sparkles,
+  Split,
+  Terminal,
+  TestTube2,
+  Workflow,
+  Wrench,
+} from "lucide-react";
+
+/** Иконка навыка по названию — вместо emoji, чтобы иконка не несла смысл в одиночку. */
+const SKILL_ICONS = {
+  Python: Braces,
+  "C++": Terminal,
+  "JavaScript / TypeScript": Code2,
+  SQL: Database,
+  "1С": LayoutTemplate,
+  Go: Atom,
+  "React / Next.js": Atom,
+  "Vue.js / Nuxt": Layers,
+  "HTML5 / CSS3": Blocks,
+  "Tailwind CSS": Sparkles,
+  "Django / FastAPI": Server,
+  "Node.js / Express": Server,
+  "PostgreSQL / MySQL": Database,
+  "MongoDB / Redis": Database,
+  "GraphQL / REST API": Network,
+  "Docker / Kubernetes": Container,
+  "CI/CD (GitLab, GitHub Actions)": RefreshCw,
+  "Linux / Bash": Terminal,
+  "AWS / GCP / Yandex Cloud": Cloud,
+  "Terraform / Ansible": Wrench,
+  "ИБ в финансовых структурах": ShieldCheck,
+  "Penetration Testing": Lock,
+  "OWASP / Security Audit": Shield,
+  "SIEM / SOC": Radar,
+  "Compliance (PCI DSS, 152-ФЗ)": Scale,
+  "Интеграция AI в бизнес": Cpu,
+  "LLM / GPT интеграция": Bot,
+  "TensorFlow / PyTorch": Brain,
+  "ML Ops": Workflow,
+  "React Native": Smartphone,
+  Flutter: Split,
+  "Swift / SwiftUI (iOS)": Apple,
+  "Kotlin / Jetpack Compose (Android)": Smartphone,
+  "Electron / Tauri (Desktop)": Monitor,
+  "BAS (Browser Automation Studio)": Bot,
+  "Selenium / Playwright": Search,
+  "Puppeteer / Cheerio": Bug,
+  "Обход Cloudflare / капч": Fingerprint,
+  "Scrapy / BeautifulSoup": FileCode2,
+  "aiogram / python-telegram-bot": MessageCircle,
+  "Telegraf (Node.js)": Zap,
+  "Telegram Web App API (MiniApp)": LayoutTemplate,
+  "Платёжные системы (Stars, ЮКасса)": Gauge,
+};
+
+/** Иконка категории навыков. */
+const CATEGORY_ICONS = {
+  "Языки программирования": Code2,
+  Frontend: LayoutTemplate,
+  "Backend и базы данных": Database,
+  "DevOps и Cloud": Container,
+  "Информационная безопасность": Shield,
+  "AI и нейросети": Cpu,
+  "Мобильная и десктопная разработка": Smartphone,
+  "Парсеры и автоматизация браузера": Bot,
+  "Telegram-боты и MiniApp": MessageCircle,
+};
+
+export function SkillIcon({ name, size = 16, className = "" }) {
+  const Icon = SKILL_ICONS[name] || Hash;
+  return <Icon size={size} className={className} aria-hidden="true" />;
+}
+
+export function CategoryIcon({ title, size = 18, className = "" }) {
+  const Icon = CATEGORY_ICONS[title] || CheckCircle2;
+  return <Icon size={size} className={className} aria-hidden="true" />;
+}
