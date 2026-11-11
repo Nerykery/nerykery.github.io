@@ -274,6 +274,19 @@ body {
   color: var(--color-accent-alt);
 }
 
+/* -- акцентная кнопка в шапке: заливка на hover и на фокусе -- */
+.btn-accent {
+  border: 1px solid rgba(255, 178, 36, 0.5);
+  color: var(--color-accent);
+}
+
+.btn-accent:hover,
+.btn-accent:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+}
+
 /* -- скролл-прогресс -- */
 .scroll-progress {
   transform-origin: left center;

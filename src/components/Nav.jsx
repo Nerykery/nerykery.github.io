@@ -89,18 +89,7 @@ export default function Nav() {
           ))}
           <a
             href="#contact"
-            className="btn min-h-0 px-4 py-1.5 text-xs text-amber"
-            style={{
-              border: "1px solid rgba(255,178,36,0.5)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--color-accent)";
-              e.currentTarget.style.color = "var(--color-bg)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "transparent";
-              e.currentTarget.style.color = "var(--color-accent)";
-            }}
+            className="btn btn-accent min-h-0 px-4 py-1.5 text-xs"
           >
             связаться
           </a>
@@ -112,7 +101,7 @@ export default function Nav() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Закрыть меню" : "Открыть меню"}
-          className="btn btn-ghost min-h-0 px-3 py-2 sm:hidden"
+          className="btn btn-ghost h-11 w-11 p-0 sm:hidden"
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
