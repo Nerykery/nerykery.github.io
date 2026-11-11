@@ -35,6 +35,10 @@ import {
   TestTube2,
   Workflow,
   Wrench,
+  Brain,
+  Apple,
+  Monitor,
+  Zap,
 } from "lucide-react";
 
 /** Иконка навыка по названию — вместо emoji, чтобы иконка не несла смысл в одиночку. */
