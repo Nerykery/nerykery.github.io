@@ -6,7 +6,7 @@ export default function Marquee() {
     <div className="relative overflow-hidden border-y border-line bg-panel/40 py-4" aria-hidden="true">
       <div className="marquee-track flex w-max items-center gap-10 whitespace-nowrap">
         {items.map((item, i) => (
-          <span key={i} className="flex items-center gap-10 font-mono text-sm text-dim">
+          <span key={`${item}-${i}`} className="flex items-center gap-10 font-mono text-sm text-dim">
             {item}
             <span className="text-amber/60">◆</span>
           </span>
